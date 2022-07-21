@@ -21,19 +21,19 @@
 ```java
     public class ArrayList<E> extends AbstractList<E>{
 
-    /**
-     * 存放元素的数组
-     */
-    transient Object[] elementData;
-
-    /**
-     * 保证容量，可以在大批量添加前使用，一次性扩容
-     */
-    public void ensureCapacity(int minCapacity);
-    /**
-     * 添加元素
-     */
-    public boolean add(E e);
+        /**
+         * 存放元素的数组
+         */
+        transient Object[] elementData;
+    
+        /**
+         * 保证容量，可以在大批量添加前使用，一次性扩容
+         */
+        public void ensureCapacity(int minCapacity);
+        /**
+         * 添加元素
+         */
+        public boolean add(E e);
 
     }
 
@@ -106,5 +106,13 @@
     }
 
 ```
+
+## JVM
+
+```java
+    // 类加载器
+    protected Class<?> loadClass(String name, boolean resolve)
+```
+
 
 
