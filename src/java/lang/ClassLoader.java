@@ -397,10 +397,13 @@ public abstract class ClassLoader {
     {
         synchronized (getClassLoadingLock(name)) {
             // First, check if the class has already been loaded
+            // 如果类已经被加载过了，不再加载 直接返回
+
             Class<?> c = findLoadedClass(name);
             if (c == null) {
                 long t0 = System.nanoTime();
                 try {
+                    // parent为父类加载器，双亲委派机制
                     if (parent != null) {
                         c = parent.loadClass(name, false);
                     } else {
