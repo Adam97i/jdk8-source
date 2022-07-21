@@ -398,22 +398,26 @@ public abstract class ClassLoader {
         synchronized (getClassLoadingLock(name)) {
             // First, check if the class has already been loaded
             // 如果类已经被加载过了，不再加载 直接返回
-
             Class<?> c = findLoadedClass(name);
             if (c == null) {
                 long t0 = System.nanoTime();
                 try {
-                    // parent为父类加载器，双亲委派机制
+                    /**
+                     * parent为父类加载器，双亲委派机制
+                     *      如果父类加载器非空，即不是Bootstrap Class Loader
+                     *      递归调用，向上寻找
+                     */
                     if (parent != null) {
                         c = parent.loadClass(name, false);
                     } else {
+                        // 为null 代表加载器为 BootStrap  调用native方法执行
                         c = findBootstrapClassOrNull(name);
                     }
                 } catch (ClassNotFoundException e) {
                     // ClassNotFoundException thrown if class not found
                     // from the non-null parent class loader
                 }
-
+                // 如果仍然为空，findClass直接抛出异常  自定义类加载器即重写findClass 方法
                 if (c == null) {
                     // If still not found, then invoke findClass in order
                     // to find the class.

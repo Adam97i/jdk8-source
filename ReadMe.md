@@ -112,6 +112,12 @@
 ```java
     // 类加载器
     protected Class<?> loadClass(String name, boolean resolve)
+    /**
+     * 自定义类加载器
+     *      打破双亲委派机制，  重写loadClass方法
+     *      不打破双亲委派机制，重写findClass方法
+     */
+        
 ```
 
 
